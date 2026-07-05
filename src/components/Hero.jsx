@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiDownload, FiArrowRight, FiMail } from 'react-icons/fi'
+import { FiArrowRight, FiCloud, FiDownload, FiMail } from 'react-icons/fi'
 import {
-  SiReact, SiNodedotjs, SiMongodb, SiJavascript, SiGit,
+  SiGit,
+  SiJavascript,
+  SiMongodb,
+  SiNodedotjs,
+  SiReact,
 } from 'react-icons/si'
-import { FiCloud } from 'react-icons/fi'
+import { profile } from '../data/profile.js'
 
 const roles = [
   'Software Developer',
@@ -85,59 +89,80 @@ export default function Hero() {
         </motion.div>
       ))}
 
-      <div className="section relative flex flex-col items-start gap-8 py-0">
+      <div className="section relative grid items-center gap-12 py-0 lg:grid-cols-[1fr_320px]">
+        <div className="flex flex-col items-start gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="glass flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs text-ink-1"
+          >
+            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            open to Software Engineering &amp; AI internships
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl md:text-6xl"
+          >
+            Hi, I&apos;m <span className="text-gradient">{profile.name}</span>.
+            <br />
+            I build software first -{' '}
+            <span className="whitespace-nowrap">
+              <span className="font-mono text-accent">{typed}</span>
+              <span className="animate-blink text-accent">|</span>
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="max-w-xl text-lg text-ink-1"
+          >
+            MCA student and React Native developer intern at BSES Rajdhani Power Limited,
+            shipping full-stack products end-to-end. Now extending that foundation into
+            AI/ML - not starting from zero, but building on production engineering
+            experience.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-wrap items-center gap-4"
+          >
+            <a href="/resume.pdf" download className="btn-primary">
+              <FiDownload /> Download Resume
+            </a>
+            <a href="#projects" className="btn-ghost">
+              View Projects <FiArrowRight />
+            </a>
+            <a href="#contact" className="btn-ghost">
+              <FiMail /> Contact Me
+            </a>
+          </motion.div>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="glass flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs text-ink-1"
+          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="relative mx-auto aspect-square w-full max-w-[280px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-glow lg:max-w-none"
         >
-          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          open to Software Engineering &amp; AI internships
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl md:text-6xl"
-        >
-          Hi, I&apos;m <span className="text-gradient">Siddhant Jain</span>.
-          <br />
-          I build software first —{' '}
-          <span className="whitespace-nowrap">
-            <span className="font-mono text-accent">{typed}</span>
-            <span className="animate-blink text-accent">|</span>
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="max-w-xl text-lg text-ink-1"
-        >
-          MCA student and React Native developer intern at BSES Rajdhani Power Limited,
-          shipping full-stack products end-to-end. Now extending that foundation into
-          AI/ML — not starting from zero, but building on production engineering
-          experience.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-wrap items-center gap-4"
-        >
-          <a href="/resume.pdf" download className="btn-primary">
-            <FiDownload /> Download Resume
-          </a>
-          <a href="#projects" className="btn-ghost">
-            View Projects <FiArrowRight />
-          </a>
-          <a href="#contact" className="btn-ghost">
-            <FiMail /> Contact Me
-          </a>
+          {profile.photoUrl ? (
+            <img
+              src={profile.photoUrl}
+              alt={profile.photoAlt}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="grid h-full w-full place-items-center bg-gradient-to-br from-primary/25 via-accent/10 to-white/5">
+              <span className="font-display text-7xl font-semibold text-ink-0">{profile.initials}</span>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

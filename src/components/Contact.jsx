@@ -1,13 +1,26 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiSend, FiGithub, FiLinkedin, FiMail, FiMapPin, FiCheck } from 'react-icons/fi'
+import {
+  FiAlertCircle,
+  FiCheck,
+  FiGithub,
+  FiInstagram,
+  FiLinkedin,
+  FiMail,
+  FiMapPin,
+  FiSend,
+} from 'react-icons/fi'
 import { USERNAME } from '../hooks/useGithub.js'
+import { profile } from '../data/profile.js'
 
 const socials = [
   { icon: FiGithub, label: 'GitHub', href: `https://github.com/${USERNAME}` },
-  { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/your-profile' },
-  { icon: FiMail, label: 'Email', href: 'mailto:your.email@example.com' },
+  { icon: FiLinkedin, label: 'LinkedIn', href: profile.linkedinUrl },
+  { icon: FiInstagram, label: 'Instagram', href: profile.instagramUrl },
+  ...(profile.email ? [{ icon: FiMail, label: 'Email', href: `mailto:${profile.email}` }] : []),
 ]
+
+const encodeForm = (data) => new window.URLSearchParams(data).toString()
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -15,14 +28,26 @@ export default function Contact() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) return
-    setStatus('sent')
-    // Wire this up to Formspree, EmailJS, or your own API endpoint —
-    // this demo simulates a successful send so the UI is fully functional.
-    setTimeout(() => setStatus('idle'), 3000)
-    setForm({ name: '', email: '', message: '' })
+    setStatus('sending')
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm({ 'form-name': 'contact', ...form }),
+      })
+
+      if (!response.ok) throw new Error('Unable to submit contact form')
+
+      setStatus('sent')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 3000)
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -36,6 +61,10 @@ export default function Contact() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -43,6 +72,13 @@ export default function Contact() {
           onSubmit={handleSubmit}
           className="glass space-y-5 p-7"
         >
+          <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden">
+            <label>
+              Do not fill this out: <input name="bot-field" />
+            </label>
+          </p>
+
           <div>
             <label className="mb-1.5 block font-mono text-xs text-ink-2">Name</label>
             <input
@@ -78,10 +114,25 @@ export default function Contact() {
               className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-ink-0 outline-none transition-colors focus:border-accent/50"
             />
           </div>
-          <button type="submit" className="btn-primary w-full">
+
+          {status === 'error' && (
+            <p className="flex items-center gap-2 text-sm text-red-300">
+              <FiAlertCircle /> Message could not be sent. Please try again.
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={status === 'sending'}
+            className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
+          >
             {status === 'sent' ? (
               <>
                 <FiCheck /> Message Sent
+              </>
+            ) : status === 'sending' ? (
+              <>
+                <FiSend /> Sending...
               </>
             ) : (
               <>
@@ -101,7 +152,7 @@ export default function Contact() {
           <div className="flex items-start gap-3">
             <FiMapPin className="mt-1 text-accent" />
             <div>
-              <p className="text-sm text-ink-1">Based in India</p>
+              <p className="text-sm text-ink-1">Based in {profile.location}</p>
               <p className="text-xs text-ink-2">Open to remote and international opportunities</p>
             </div>
           </div>

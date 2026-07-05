@@ -1,15 +1,48 @@
-// Add your real certifications here. Each card falls back to a placeholder
-// state until you fill in `earned: true` and the corresponding fields.
 export const categories = ['All', 'Cloud', 'AI/ML', 'Development', 'Other']
 
-export const certifications = Array.from({ length: 12 }).map((_, i) => ({
-  id: i + 1,
-  earned: false,
-  name: `Certificate Slot ${i + 1}`,
-  issuer: 'Add issuing organization',
-  date: '—',
-  credentialId: '—',
-  category: categories[(i % (categories.length - 1)) + 1],
-  image: null,
-  verifyUrl: '#',
-}))
+export const certifications = [
+  {
+    id: 1,
+    earned: true,
+    name: 'Project Completion Certificate',
+    issuer: 'BSES Rajdhani Power Limited',
+    date: 'August 2025',
+    credentialId: 'BSES AMPS App with API Integration',
+    category: 'Development',
+    image: '/certificates/bses-project-completion.jpg',
+    verifyUrl: '/certificates/bses-project-completion.jpg',
+  },
+  {
+    id: 2,
+    earned: true,
+    name: 'Web Development Internship Offer',
+    issuer: 'CodSoft',
+    date: 'October 2023',
+    credentialId: 'CS07PB8800',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/codsoft-web-development-internship.pdf',
+  },
+  {
+    id: 3,
+    earned: true,
+    name: 'Web Developer Intern Offer',
+    issuer: 'Bharat Intern',
+    date: 'October 2023',
+    credentialId: 'Virtual Internship',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/bharat-intern-web-developer.pdf',
+  },
+  {
+    id: 4,
+    earned: true,
+    name: 'Unreal Engine 5 Workshop',
+    issuer: 'Game Development Hub, JIIT Noida',
+    date: 'November 2023',
+    credentialId: 'JYC/GameDev Hub 2023-2024/028',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/jiit-unreal-engine-workshop.pdf',
+  },
+]

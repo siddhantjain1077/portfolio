@@ -1,5 +1,6 @@
-import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from 'react-icons/fi'
+import { FiArrowUp, FiGithub, FiInstagram, FiLinkedin, FiMail } from 'react-icons/fi'
 import { USERNAME } from '../hooks/useGithub.js'
+import { profile } from '../data/profile.js'
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -17,7 +18,7 @@ export default function Footer() {
             <span className="text-accent">&lt;</span>Siddhant<span className="text-accent">/&gt;</span>
           </a>
           <p className="mt-3 max-w-xs text-sm text-ink-2">
-            Software engineer building toward AI — one shipped project at a time.
+            Software engineer building toward AI - one shipped project at a time.
           </p>
         </div>
 
@@ -47,7 +48,7 @@ export default function Footer() {
               <FiGithub size={16} />
             </a>
             <a
-              href="https://linkedin.com/in/your-profile"
+              href={profile.linkedinUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -56,19 +57,30 @@ export default function Footer() {
               <FiLinkedin size={16} />
             </a>
             <a
-              href="mailto:your.email@example.com"
-              aria-label="Email"
+              href={profile.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
               className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-ink-1 transition-colors hover:border-accent/50 hover:text-accent"
             >
-              <FiMail size={16} />
+              <FiInstagram size={16} />
             </a>
+            {profile.email && (
+              <a
+                href={`mailto:${profile.email}`}
+                aria-label="Email"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-ink-1 transition-colors hover:border-accent/50 hover:text-accent"
+              >
+                <FiMail size={16} />
+              </a>
+            )}
           </div>
         </div>
       </div>
 
       <div className="border-t border-white/10 py-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-xs text-ink-2 md:flex-row md:px-10">
-          <p>© {new Date().getFullYear()} Siddhant Jain. All rights reserved.</p>
+          <p>(c) {new Date().getFullYear()} Siddhant Jain. All rights reserved.</p>
           <a href="#top" className="flex items-center gap-1.5 transition-colors hover:text-accent">
             Back to top <FiArrowUp size={12} />
           </a>
