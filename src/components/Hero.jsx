@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiArrowRight, FiCloud, FiDownload, FiMail } from 'react-icons/fi'
 import {
@@ -9,13 +8,6 @@ import {
   SiReact,
 } from 'react-icons/si'
 import { profile } from '../data/profile.js'
-
-const roles = [
-  'Software Developer',
-  'React Native Developer',
-  'MCA Student',
-  'Aspiring AI Engineer',
-]
 
 const floatIcons = [
   { Icon: SiReact, style: 'left-[6%] top-[22%]', delay: 0 },
@@ -37,41 +29,7 @@ function getProfilePhotoSrc(photoUrl) {
   return photoUrl
 }
 
-function useTypewriter(words) {
-  const [index, setIndex] = useState(0)
-  const [text, setText] = useState('')
-  const [deleting, setDeleting] = useState(false)
-
-  useEffect(() => {
-    const current = words[index % words.length]
-    const speed = deleting ? 40 : 80
-    const pause = 1400
-
-    const timeout = setTimeout(() => {
-      if (!deleting) {
-        const next = current.slice(0, text.length + 1)
-        setText(next)
-        if (next === current) {
-          setTimeout(() => setDeleting(true), pause)
-        }
-      } else {
-        const next = current.slice(0, text.length - 1)
-        setText(next)
-        if (next === '') {
-          setDeleting(false)
-          setIndex((i) => i + 1)
-        }
-      }
-    }, speed)
-
-    return () => clearTimeout(timeout)
-  }, [text, deleting, index, words])
-
-  return text
-}
-
 export default function Hero() {
-  const typed = useTypewriter(roles)
   const profilePhotoSrc = getProfilePhotoSrc(profile.photoUrl)
 
   return (
@@ -122,10 +80,7 @@ export default function Hero() {
             Hi, I&apos;m <span className="text-gradient">{profile.name}</span>.
             <br />
             I build software first -{' '}
-            <span className="whitespace-nowrap">
-              <span className="font-mono text-accent">{typed}</span>
-              <span className="animate-blink text-accent">|</span>
-            </span>
+            {/* <span className="font-mono text-accent">Software Developer</span> */}
           </motion.h1>
 
           <motion.p
