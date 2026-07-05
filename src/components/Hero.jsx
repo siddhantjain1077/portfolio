@@ -26,6 +26,17 @@ const floatIcons = [
   { Icon: FiCloud, style: 'right-[20%] top-[8%]', delay: 1.1 },
 ]
 
+function getProfilePhotoSrc(photoUrl) {
+  if (!photoUrl) return ''
+
+  const driveMatch = photoUrl.match(/drive\.google\.com\/file\/d\/([^/]+)/)
+  if (driveMatch?.[1]) {
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`
+  }
+
+  return photoUrl
+}
+
 function useTypewriter(words) {
   const [index, setIndex] = useState(0)
   const [text, setText] = useState('')
@@ -61,6 +72,7 @@ function useTypewriter(words) {
 
 export default function Hero() {
   const typed = useTypewriter(roles)
+  const profilePhotoSrc = getProfilePhotoSrc(profile.photoUrl)
 
   return (
     <section
@@ -152,9 +164,9 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="relative mx-auto aspect-square w-full max-w-[280px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-glow lg:max-w-none"
         >
-          {profile.photoUrl ? (
+          {profilePhotoSrc ? (
             <img
-              src={profile.photoUrl}
+              src={profilePhotoSrc}
               alt={profile.photoAlt}
               className="h-full w-full object-cover"
             />

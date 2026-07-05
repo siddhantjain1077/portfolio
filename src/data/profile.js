@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Siddhant Jain',
   initials: 'SJ',
-  photoUrl: 'public/profile-photo.jpg',
+  photoUrl: 'https://drive.google.com/file/d/1wdKZMB9k3bw_nr55lnNHDxYUOKpPvcCn/view?usp=sharing',
   photoAlt: 'Siddhant Jain',
   location: 'India',
   email: '',

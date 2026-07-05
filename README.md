@@ -26,7 +26,8 @@ Open the printed local URL, usually `http://localhost:5173`.
 
 1. **Resume** - drop your real PDF at `public/resume.pdf`.
 2. **Profile photo** - add your image at `public/profile-photo.jpg`, then set
-   `photoUrl: '/profile-photo.jpg'` in `src/data/profile.js`.
+   `photoUrl: '/profile-photo.jpg'` in `src/data/profile.js`. A Google Drive
+   share link also works if the file access is set to "Anyone with the link".
 3. **Social links** - LinkedIn and Instagram live in `src/data/profile.js`.
    Add your email there too if you want an email icon shown.
 4. **Certifications** - the current BSES, CodSoft, Bharat Intern, and JIIT
