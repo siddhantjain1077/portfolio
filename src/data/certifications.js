@@ -1,0 +1,48 @@
+export const categories = ['All', 'Cloud', 'AI/ML', 'Development', 'Other']
+
+export const certifications = [
+  {
+    id: 1,
+    earned: true,
+    name: 'Project Completion Certificate',
+    issuer: 'BSES Rajdhani Power Limited',
+    date: 'August 2025',
+    credentialId: 'BSES AMPS App with API Integration',
+    category: 'Development',
+    image: '/certificates/bses-project-completion.jpg',
+    verifyUrl: '/certificates/bses-project-completion.jpg',
+  },
+  {
+    id: 2,
+    earned: true,
+    name: 'Web Development Internship Offer',
+    issuer: 'CodSoft',
+    date: 'October 2023',
+    credentialId: 'CS07PB8800',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/codsoft-web-development-internship.pdf',
+  },
+  {
+    id: 3,
+    earned: true,
+    name: 'Web Developer Intern Offer',
+    issuer: 'Bharat Intern',
+    date: 'October 2023',
+    credentialId: 'Virtual Internship',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/bharat-intern-web-developer.pdf',
+  },
+  {
+    id: 4,
+    earned: true,
+    name: 'Unreal Engine 5 Workshop',
+    issuer: 'Game Development Hub, JIIT Noida',
+    date: 'November 2023',
+    credentialId: 'JYC/GameDev Hub 2023-2024/028',
+    category: 'Development',
+    image: null,
+    verifyUrl: '/certificates/jiit-unreal-engine-workshop.pdf',
+  },
+]
