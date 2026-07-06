@@ -103,6 +103,18 @@ export default function Contact() {
             />
           </div>
           <div>
+            <label className="mb-1.5 block font-mono text-xs text-ink-2">contact number</label>
+            <input
+              type="number"
+              name="conact number"
+              value={form.number}
+              onChange={handleChange}
+              required
+              placeholder="Contact number"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-ink-0 outline-none transition-colors focus:border-accent/50"
+            />
+          </div>
+          <div>
             <label className="mb-1.5 block font-mono text-xs text-ink-2">Message</label>
             <textarea
               name="message"
