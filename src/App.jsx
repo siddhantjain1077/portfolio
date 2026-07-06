@@ -13,8 +13,8 @@ const Experience = lazy(() => import('./components/Experience.jsx'))
 const Projects = lazy(() => import('./components/Projects.jsx'))
 const Certifications = lazy(() => import('./components/Certifications.jsx'))
 const Education = lazy(() => import('./components/Education.jsx'))
-const Achievements = lazy(() => import('./components/Achievements.jsx'))
-const GithubStats = lazy(() => import('./components/GithubStats.jsx'))
+// const Achievements = lazy(() => import('./components/Achievements.jsx'))
+// const GithubStats = lazy(() => import('./components/GithubStats.jsx'))
 const Roadmap = lazy(() => import('./components/Roadmap.jsx'))
 const Contact = lazy(() => import('./components/Contact.jsx'))
 
@@ -39,8 +39,8 @@ export default function App() {
           <Education />
           <Projects />
           <Certifications />
-          <Achievements />
-          <GithubStats />
+          {/* <Achievements /> */}
+          {/* <GithubStats /> */}
           <Roadmap />
           <Contact />
         </Suspense>
