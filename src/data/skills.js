@@ -14,7 +14,7 @@ export const skillGroups = [
     label: 'Backend',
     skills: [
       { name: 'Node.js', level: 75 },
-      { name: 'Express.js', level: 75 },
+      { name: 'Express.js', level: 25 },
       { name: 'REST APIs', level: 80 },
       { name: 'Java', level: 65 },
     ],
@@ -22,7 +22,7 @@ export const skillGroups = [
   {
     label: 'Database',
     skills: [
-      { name: 'MongoDB', level: 75 },
+      { name: 'MongoDB', level: 25 },
       { name: 'SQL', level: 70 },
     ],
   },
@@ -38,11 +38,11 @@ export const skillGroups = [
   {
     label: 'Currently Learning',
     skills: [
-      { name: 'Data Structures & Algorithms', level: 55 },
-      { name: 'AWS', level: 40 },
-      { name: 'Azure', level: 30 },
-      { name: 'Machine Learning', level: 45 },
-      { name: 'LLMs & Generative AI', level: 50 },
+      { name: 'Data Structures & Algorithms', level: 0 },
+      { name: 'AWS', level: 0 },
+      { name: 'Azure', level: 0 },
+      { name: 'Machine Learning', level: 0 },
+      { name: 'LLMs & Generative AI', level: 0 },
     ],
   },
 ]

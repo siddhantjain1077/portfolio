@@ -8,6 +8,7 @@ import {
   SiReact,
 } from 'react-icons/si'
 import { profile } from '../data/profile.js'
+import { certifications } from '../data/certifications.js'
 
 const floatIcons = [
   { Icon: SiReact, style: 'left-[6%] top-[22%]', delay: 0 },
@@ -31,6 +32,7 @@ function getProfilePhotoSrc(photoUrl) {
 
 export default function Hero() {
   const profilePhotoSrc = getProfilePhotoSrc(profile.photoUrl)
+  const featuredCertificates = certifications.filter((cert) => cert.image && cert.earned).slice(0, 2)
 
   return (
     <section
@@ -117,17 +119,43 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="relative mx-auto aspect-square w-full max-w-[280px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-glow lg:max-w-none"
+          className="relative mx-auto flex w-full max-w-[320px] flex-col gap-3 lg:max-w-none"
         >
-          {profilePhotoSrc ? (
-            <img
-              src={profilePhotoSrc}
-              alt={profile.photoAlt}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <div className="grid h-full w-full place-items-center bg-gradient-to-br from-primary/25 via-accent/10 to-white/5">
-              <span className="font-display text-7xl font-semibold text-ink-0">{profile.initials}</span>
+          <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-glow">
+            {profilePhotoSrc ? (
+              <img
+                src={profilePhotoSrc}
+                alt={profile.photoAlt}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="grid h-full w-full place-items-center bg-gradient-to-br from-primary/25 via-accent/10 to-white/5">
+                <span className="font-display text-7xl font-semibold text-ink-0">{profile.initials}</span>
+              </div>
+            )}
+          </div>
+
+          {featuredCertificates.length > 0 && (
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              {featuredCertificates.map((cert) => (
+                <a
+                  key={cert.id}
+                  href={cert.verifyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass glass-hover overflow-hidden rounded-2xl p-2 text-left"
+                >
+                  <img
+                    src={cert.image}
+                    alt={`${cert.name} preview`}
+                    className="h-24 w-full rounded-xl object-cover object-top"
+                  />
+                  <div className="px-2 pb-1 pt-2">
+                    <p className="text-sm font-medium text-ink-0">{cert.name}</p>
+                    <p className="mt-1 font-mono text-[11px] text-ink-2">{cert.issuer}</p>
+                  </div>
+                </a>
+              ))}
             </div>
           )}
         </motion.div>
